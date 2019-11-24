@@ -1,2 +1,0 @@
-*.MonomTest.java
-*.PolynomTest.java
