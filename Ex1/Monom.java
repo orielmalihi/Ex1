@@ -100,16 +100,21 @@ public class Monom implements function{
 			}
 			else {
 				coef = s.substring(0, t);
-				this._coefficient = Double.parseDouble(coef);
-				pow = s.substring(t+1);
-				if(pow.length()>=1 && pow.charAt(0)=='^')
-					pow = pow.substring(1);
-				if(pow.length()==0)
-					this._power = 1;
-				else if(Integer.parseInt(pow)<0)
-					throw new RuntimeException("ERR the power of Monom should not be negative, got: "+pow);
-				else
-					this._power = Integer.parseInt(pow);
+				if(coef.equals("0")) {
+					this._coefficient=0;
+					this._power=0;
+				}else {
+					this._coefficient = Double.parseDouble(coef);
+					pow = s.substring(t+1);
+					if(pow.length()>=1 && pow.charAt(0)=='^')
+						pow = pow.substring(1);
+					if(pow.length()==0)
+						this._power = 1;
+					else if(Integer.parseInt(pow)<0)
+						throw new RuntimeException("ERR the power of Monom should not be negative, got: "+pow);
+					else
+						this._power = Integer.parseInt(pow);
+				}
 			}
 		}catch(Exception e) {
 			throw new RuntimeException("ERR unable to build this Monom: "+s);
@@ -188,12 +193,14 @@ public class Monom implements function{
 	@Override
 	public function initFromString(String s) {
 		// TODO Auto-generated method stub
-		return null;
+		function f = new Monom(s);
+		return f;
 	}
 	@Override
 	public function copy() {
 		// TODO Auto-generated method stub
-		return null;
+		function f = new Monom(this);
+		return f;
 	}
 
 
