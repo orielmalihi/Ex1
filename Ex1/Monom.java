@@ -130,6 +130,9 @@ public class Monom implements function{
 			throw new RuntimeException("ERR the power of the two joined monomes shoud be equal, got: "+this._power+" and "+m._power);
 		else {
 			this._coefficient = this._coefficient + m._coefficient;
+			if(this._coefficient==0) {
+				this._power=0;
+			}
 		}
 	}
 	/**

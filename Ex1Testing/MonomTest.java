@@ -54,6 +54,7 @@ class MonomTest {
 		m1.add(m2);
 		Monom ans = new Monom("x^5");
 		assertEquals(ans, m1);
+		
 	}
 
 	@Test
@@ -78,8 +79,9 @@ class MonomTest {
 	void testEqualsObject() {
 		Monom m1 = new Monom("3x^5");
 		Monom m2 = new Monom(3,5);
+		assertEquals(m1.toString(), m2.toString());
 		if(m1.equals(m2)!=true)
-			fail("Equal function doesn't work");
+			fail("not equals");
 	}
 
 	@Test

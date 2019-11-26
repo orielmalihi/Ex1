@@ -29,19 +29,20 @@ public class Polynom implements Polynom_able{
 	 * @param s: is a string represents a Polynom
 	 */
 	public Polynom(String s) {
+		s = s.replaceAll("\\s","");
 		String Notgood = s;
 		try {
-		bank = new ArrayList<Monom>();
-		String cut = "";
-		while(s.length()!=0) {
-			while(s.length()!=0 && (s.charAt(0)!='-' && s.charAt(0)!='+') || cut.length()==0){
-				cut+= s.charAt(0);
-				s=s.substring(1);
+			bank = new ArrayList<Monom>();
+			String cut = "";
+			while(s.length()!=0) {
+				while(s.length()!=0 && (s.charAt(0)!='-' && s.charAt(0)!='+') || cut.length()==0){
+					cut+= s.charAt(0);
+					s=s.substring(1);
+				}
+				bank.add(new Monom(cut));
+				cut="";
 			}
-			bank.add(new Monom(cut));
-			cut="";
-		}
-		bank.sort(new Monom_Comperator());
+			bank.sort(new Monom_Comperator());
 		}catch(Exception e) {
 			throw new RuntimeException("ERR unable to bild this Polynom: "+Notgood);
 		}
@@ -84,11 +85,18 @@ public class Polynom implements Polynom_able{
 			Monom m = it.next();
 			if(m.get_power()==m1.get_power()) {
 				m.add(m1);
+				for(int i = 0; i<bank.size(); i++)
+					if(bank.get(i).get_coefficient()==0) {
+						bank.remove(i);
+						return;
+					}
 				return;
 			}
 		}
-		bank.add(new Monom(m1));
-		bank.sort(new Monom_Comperator());
+		if(m1.get_coefficient()!=0) {
+			bank.add(new Monom(m1));
+			bank.sort(new Monom_Comperator());
+		}
 	}
 
 	@Override
@@ -101,6 +109,11 @@ public class Polynom implements Polynom_able{
 			Monom m = it.next();
 			this.substract(m);
 		}
+		for(int i =0; i<bank.size(); i++)
+			if(bank.get(i).get_coefficient()==0) {
+				bank.remove(i);
+			}
+		
 
 	}
 	/**
@@ -115,7 +128,7 @@ public class Polynom implements Polynom_able{
 				Monom mnew = new Monom(m1.get_coefficient()*-1, m1.get_power());
 				m.add(mnew);
 				return;
-			}
+			}	
 		}
 		Monom mnew = new Monom(m1.get_coefficient()*-1, m1.get_power());
 		bank.add(mnew);
@@ -137,7 +150,7 @@ public class Polynom implements Polynom_able{
 			ans.add(cop);
 		}
 		this.bank = ans.bank;
-		
+
 	}
 
 
@@ -146,6 +159,29 @@ public class Polynom implements Polynom_able{
 	 * returns true if Polynom_able p1 is logically equal to this Polynom
 	 */
 	public boolean equals(Polynom_able p1) {
+		if(p1.toString()=="0" && this.toString()=="0")
+			return true;
+		boolean b = false;
+		Iterator<Monom> p1it = p1.iteretor();
+		while(p1it.hasNext()) {
+			Monom m = p1it.next();
+			Iterator<Monom> thisp = this.iteretor();
+			while(thisp.hasNext()) {
+				Monom thism = thisp.next();
+				if(thism.equals(m))
+					b = true;
+			}
+			if(!b)
+				return false;
+			b = false;	
+		}
+		return true;
+	}
+	
+	public boolean equals(Object obj) {
+		Polynom_able p1 = (Polynom_able)obj;
+		if(p1.toString()=="0" && this.toString()=="0")
+			return true;
 		boolean b = false;
 		Iterator<Monom> p1it = p1.iteretor();
 		while(p1it.hasNext()) {
@@ -282,14 +318,18 @@ public class Polynom implements Polynom_able{
 	 * returns this Polynom as a String
 	 */
 	public String toString() {
+		if(bank.isEmpty())
+			return "0";
+		if(bank.size()==1 && bank.get(0).get_coefficient()==0)
+			return "0";
 		String ans="";
 		Iterator<Monom> it = this.iteretor();
 		while(it.hasNext()) {
 			Monom m = it.next();
 			if(m.get_coefficient()> 0 && ans.length()!=0)
-				ans += " + "+m.toString();
+				ans += "+"+m.toString();
 			else
-				ans += " "+ m.toString();
+				ans += ""+ m.toString();
 		}
 		return ans;
 	}
