@@ -246,12 +246,7 @@ public class Polynom implements Polynom_able{
 	 */
 	public Polynom_able copy() {
 		// TODO Auto-generated method stub
-		Polynom p = new Polynom();
-		Iterator<Monom> it = this.iteretor();
-		while(it.hasNext()) {
-			Monom m = it.next();
-			p.add(m);
-		}
+		Polynom_able p = new Polynom(this.toString());
 		return p;
 	}
 
