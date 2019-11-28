@@ -113,7 +113,7 @@ public class Polynom implements Polynom_able{
 			if(bank.get(i).get_coefficient()==0) {
 				bank.remove(i);
 			}
-		
+
 
 	}
 	/**
@@ -177,27 +177,31 @@ public class Polynom implements Polynom_able{
 		}
 		return true;
 	}
-	
+
 	public boolean equals(Object obj) {
-		Polynom_able p1 = (Polynom_able)obj;
-		if(p1.toString()=="0" && this.toString()=="0")
-			return true;
-		boolean b = false;
-		Iterator<Monom> p1it = p1.iteretor();
-		while(p1it.hasNext()) {
-			Monom m = p1it.next();
-			Iterator<Monom> thisp = this.iteretor();
-			while(thisp.hasNext()) {
-				Monom thism = thisp.next();
-				if(thism.equals(m))
-					b = true;
+		if(obj instanceof Polynom_able) {
+			Polynom_able p1 = (Polynom_able)obj;
+			if(p1.toString()=="0" && this.toString()=="0")
+				return true;
+			boolean b = false;
+			Iterator<Monom> p1it = p1.iteretor();
+			while(p1it.hasNext()) {
+				Monom m = p1it.next();
+				Iterator<Monom> thisp = this.iteretor();
+				while(thisp.hasNext()) {
+					Monom thism = thisp.next();
+					if(thism.equals(m))
+						b = true;
+				}
+				if(!b)
+					return false;
+				b = false;	
 			}
-			if(!b)
-				return false;
-			b = false;	
+			return true;
 		}
-		return true;
+		return false;	
 	}
+
 	/**
 	 * returns true if this Polynom equals 0
 	 */
