@@ -12,20 +12,18 @@ class ComplexFunctionTest {
 
 	@Test
 	void testComplexFunction() {
-		ComplexFunction c = new ComplexFunction();
-		complex_function c1 = new ComplexFunction(c.toString());
-		assertEquals(c1, c);
-		ComplexFunction c2 = new ComplexFunction("Divid(4x^2,3+x)");
-		complex_function c3 = new ComplexFunction(c2.toString());
-		assertEquals(c3, c2);
-		ComplexFunction c4 = new ComplexFunction("Plus(Divid(4x^2,3+x),-2)");
-		complex_function c5 = new ComplexFunction(c4.toString());
-		assertEquals(c4, c5);
+		String[] goodExamples = {"Divid(4x^2,3+x)", "Plus(Divid(4x^2,3+x),-2)", "Plus(3x,Divid(x^2,x))" };
+		for(int i = 0; i<goodExamples.length; i++) {
+			ComplexFunction f1 = new ComplexFunction(goodExamples[i]);
+			ComplexFunction f2 = new ComplexFunction(f1.toString());
+			assertEquals(f1, f2);
+			
+		}
 		String[] badExamples = { "plus(x,2)", "Comp((x^2, x)", "Comp(x^2, x))", "Min(x^2 x))"};	
 		int error = 0;
 		for(int i = 0; i<badExamples.length; i++ ) {
 			try {
-				c = new ComplexFunction(badExamples[i]);
+				ComplexFunction f3 = new ComplexFunction(badExamples[i]);
 			} catch (Exception e){
 				error++;
 			}
@@ -54,7 +52,7 @@ class ComplexFunctionTest {
 		expected = 25;
 		assertEquals(expected, cof4.f(x));
 		int error = 0;
-		String[] badExamples = { "Divid(Plus(3x+x^2,x),0)",	"None(Divid(3x+x^2,x),x^3)", "Error(Divid(3x+x^2,x),x^3)"};																													
+		String[] badExamples = { "Divid(Plus(3x+x^2,x),0)", "Error(Divid(3x+x^2,x),x^3)"};																													
 		for(int i = 0; i<badExamples.length; i++ ) {
 			try {
 				ComplexFunction cof5 = new ComplexFunction(badExamples[i]);
