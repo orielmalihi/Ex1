@@ -5,8 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import Ex1.ComplexFunction;
+import Ex1.Monom;
+import Ex1.Operation;
 import Ex1.Polynom;
 import Ex1.complex_function;
+import Ex1.function;
 
 class ComplexFunctionTest {
 
@@ -68,57 +71,132 @@ class ComplexFunctionTest {
 
 	@Test
 	void testInitFromString() {
-		fail("Not yet implemented");
+		ComplexFunction f1 = new ComplexFunction("Plus(Divid(4x^2,3+x),-2)");
+		function f2 = f1.initFromString("Plus(Divid(4x^2,3+x),-2)");
+		assertEquals(f1, f2);
 	}
 
 	@Test
 	void testCopy() {
-		fail("Not yet implemented");
+		ComplexFunction f1 = new ComplexFunction("Plus(Divid(4x^2,3+x),-2)");
+		function f2 = f1.copy();
+		assertEquals(f1, f2);
 	}
 
 	@Test
 	void testPlus() {
-		fail("Not yet implemented");
+		ComplexFunction f1 = new ComplexFunction();
+		ComplexFunction f2 = new ComplexFunction("Times(3x+x^2, 2x)");
+		Polynom p = new Polynom("1+x");
+		f1.plus(p);
+		f1.plus(f2);
+		p.multiply(new Monom("2"));
+		f1.plus(p);
+		ComplexFunction expected = new ComplexFunction("Plus(Plus(1+x,Times(3x + x^2, 2x)),2+2x)");
+		assertEquals(expected, f1);
 	}
 
 	@Test
 	void testMul() {
-		fail("Not yet implemented");
+		ComplexFunction f1 = new ComplexFunction();
+		ComplexFunction f2 = new ComplexFunction("Times(3x+x^2, 2x)");
+		Polynom p = new Polynom("1+x");
+		f1.mul(p);
+		f1.mul(f2);
+		p.multiply(new Monom("2"));
+		f1.mul(p);
+		ComplexFunction expected = new ComplexFunction("Times(Times(1+x,Times(3x + x^2, 2x)),2+2x)");
+		assertEquals(expected, f1);
 	}
 
 	@Test
 	void testDiv() {
-		fail("Not yet implemented");
+		ComplexFunction f1 = new ComplexFunction();
+		ComplexFunction f2 = new ComplexFunction("Times(3x+x^2, 2x)");
+		Polynom p = new Polynom("1+x");
+		f1.div(p);
+		f1.div(f2);
+		p.multiply(new Monom("2"));
+		f1.div(p);
+		ComplexFunction expected = new ComplexFunction("Divid(Divid(1+x,Times(3x + x^2, 2x)),2+2x)");
+		assertEquals(expected, f1);
 	}
 
 	@Test
 	void testMax() {
-		fail("Not yet implemented");
+		ComplexFunction f1 = new ComplexFunction();
+		ComplexFunction f2 = new ComplexFunction("Times(3x+x^2, 2x)");
+		Polynom p = new Polynom("1+x");
+		f1.max(p);
+		f1.max(f2);
+		p.multiply(new Monom("2"));
+		f1.max(p);
+		ComplexFunction expected = new ComplexFunction("Max(Max(1+x,Times(3x + x^2, 2x)),2+2x)");
+		assertEquals(expected, f1);
 	}
 
 	@Test
 	void testMin() {
-		fail("Not yet implemented");
+		ComplexFunction f1 = new ComplexFunction();
+		ComplexFunction f2 = new ComplexFunction("Times(3x+x^2, 2x)");
+		Polynom p = new Polynom("1+x");
+		f1.min(p);
+		f1.min(f2);
+		p.multiply(new Monom("2"));
+		f1.min(p);
+		ComplexFunction expected = new ComplexFunction("Min(Min(1+x,Times(3x + x^2, 2x)),2+2x)");
+		assertEquals(expected, f1);
 	}
 
 	@Test
 	void testComp() {
-		fail("Not yet implemented");
+		ComplexFunction f1 = new ComplexFunction();
+		ComplexFunction f2 = new ComplexFunction("Times(3x+x^2, 2x)");
+		Polynom p = new Polynom("1+x");
+		f1.comp(p);
+		f1.comp(f2);
+		p.multiply(new Monom("2"));
+		f1.comp(p);
+		ComplexFunction expected = new ComplexFunction("Comp(Comp(1+x,Times(3x + x^2, 2x)),2+2x)");
+		assertEquals(expected, f1);
 	}
 
 	@Test
 	void testLeft() {
-		fail("Not yet implemented");
+		ComplexFunction f1 = new ComplexFunction("Plus(2+x,x^2)");
+		ComplexFunction f2 = new ComplexFunction("Comp(Plus(2+x,x^2),4x)");
+		function f1Left = f1.left();
+		function f2Left = f2.left();
+		Polynom f1Expected = new Polynom("2+x");
+		ComplexFunction f2Expected = new ComplexFunction("Plus(2+x,x^2)");
+		assertEquals(f1Expected, f1Left);
+		assertEquals(f2Expected, f2Left);
 	}
 
 	@Test
 	void testRight() {
-		fail("Not yet implemented");
+		ComplexFunction f1 = new ComplexFunction("Plus(2+x,x^2)");
+		ComplexFunction f2 = new ComplexFunction("Comp(Plus(2+x,x^2),4x)");
+		function f1Right = f1.right();
+		function f2Right = f2.right();
+		Polynom f1Expected = new Polynom("x^2");
+		Polynom f2Expected = new Polynom("4x");
+		assertEquals(f1Expected, f1Right);
+		assertEquals(f2Expected, f2Right);
 	}
+	
 
 	@Test
 	void testGetOp() {
-		fail("Not yet implemented");
+		ComplexFunction f1 = new ComplexFunction();
+		f1.plus(new ComplexFunction("Times(3x,x)"));
+		assertEquals("None", f1.getOp().toString());
+		f1.plus(new Polynom("2"));
+		assertEquals("Plus", f1.getOp().toString());
+		f1.mul(new ComplexFunction("Comp(x,x^2"));
+		assertEquals("Times", f1.getOp().toString());
+		
+		
 	}
 
 }

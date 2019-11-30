@@ -141,9 +141,9 @@ public class ComplexFunction implements complex_function {
 		}
 		else if(fr.toString().equals("0") && op.toString().equals("None") ) {
 			if(f1 instanceof Polynom_able)
-				fl = new Polynom(f1.toString());
+				fr = new Polynom(f1.toString());
 			else
-				fl = new ComplexFunction(f1.toString());
+				fr = new ComplexFunction(f1.toString());
 			op = Operation.Plus;
 		}
 		else {
@@ -168,9 +168,9 @@ public class ComplexFunction implements complex_function {
 		}
 		else if(fr.toString().equals("0") && op.toString().equals("None") ) {
 			if(f1 instanceof Polynom_able)
-				fl = new Polynom(f1.toString());
+				fr = new Polynom(f1.toString());
 			else
-				fl = new ComplexFunction(f1.toString());
+				fr = new ComplexFunction(f1.toString());
 			op = Operation.Times;
 		}
 		else {
@@ -195,9 +195,9 @@ public class ComplexFunction implements complex_function {
 		}
 		else if(fr.toString().equals("0") && op.toString().equals("None") ) {
 			if(f1 instanceof Polynom_able)
-				fl = new Polynom(f1.toString());
+				fr = new Polynom(f1.toString());
 			else
-				fl = new ComplexFunction(f1.toString());
+				fr = new ComplexFunction(f1.toString());
 			op = Operation.Divid;
 		}
 		else {
@@ -222,9 +222,9 @@ public class ComplexFunction implements complex_function {
 		}
 		else if(fr.toString().equals("0") && op.toString().equals("None") ) {
 			if(f1 instanceof Polynom_able)
-				fl = new Polynom(f1.toString());
+				fr = new Polynom(f1.toString());
 			else
-				fl = new ComplexFunction(f1.toString());
+				fr = new ComplexFunction(f1.toString());
 			op = Operation.Max;
 		}
 		else {
@@ -249,9 +249,9 @@ public class ComplexFunction implements complex_function {
 		}
 		else if(fr.toString().equals("0") && op.toString().equals("None") ) {
 			if(f1 instanceof Polynom_able)
-				fl = new Polynom(f1.toString());
+				fr = new Polynom(f1.toString());
 			else
-				fl = new ComplexFunction(f1.toString());
+				fr = new ComplexFunction(f1.toString());
 			op = Operation.Min;
 		}
 		else {
@@ -276,9 +276,9 @@ public class ComplexFunction implements complex_function {
 		}
 		else if(fr.toString().equals("0") && op.toString().equals("None") ) {
 			if(f1 instanceof Polynom_able)
-				fl = new Polynom(f1.toString());
+				fr = new Polynom(f1.toString());
 			else
-				fl = new ComplexFunction(f1.toString());
+				fr = new ComplexFunction(f1.toString());
 			op = Operation.Comp;
 		}
 		else {
@@ -295,20 +295,19 @@ public class ComplexFunction implements complex_function {
 	@Override
 	public function left() {
 		// TODO Auto-generated method stub
-		if(appearanceOfChar(fl.toString(), ',')>=1) {
-			function f = new ComplexFunction(fl.toString()); 
-			return f;
-		}else {
-			function f = new Polynom(fl.toString());
-			return f;
-		}
+		if(fl instanceof Polynom_able)
+			return new Polynom(fl.toString());
+		else
+			return new ComplexFunction(fl.toString());
 	}
 
 	@Override
 	public function right() {
 		// TODO Auto-generated method stub
-		function f = new Polynom(fr.toString());
-		return f;
+		if(fr instanceof Polynom_able)
+			return new Polynom(fr.toString());
+		else
+			return new ComplexFunction(fr.toString());
 	}
 
 	@Override
