@@ -39,6 +39,20 @@ class Functions_GUITest {
 	void setUp() throws Exception {
 		_data = FunctionsFactory();
 	}
+	
+	@Test
+	void testadd() {
+		Functions_GUI c = new Functions_GUI();
+		Polynom p = new Polynom("2x");
+		c.add(p);
+		System.out.println(c.contains(p));
+		System.out.println(c.size());
+		c.add(p);
+		System.out.println(c.size());
+		System.out.println(c.contains(new Polynom("-2x")));
+		System.out.println(c.add(new Polynom("-2x")));
+		System.out.println(c.size());
+	}
 
 	//@Test
 	void testFunctions_GUI() {

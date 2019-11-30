@@ -11,8 +11,41 @@ public class ComplexFunction implements complex_function {
 		fr = new Polynom("0");
 		op = Operation.None;
 	}
+	
+	public ComplexFunction(function f) {
+		fl = f.copy();
+		fr = new Polynom("0");
+		op = op.None;
+	}
+	
+	public ComplexFunction(String oper, function f1, function f2) {
+		switch (oper){
+			case "plus":
+				op = op.Plus;
+				break;
+			case "mul":
+				op = op.Times;
+				break;
+			case "div":
+				op = op.Divid;
+				break;
+			case "min":
+				op = op.Min;
+				break;
+			case "max":
+				op = op.Max;
+				break;
+			case "comp":
+				op = op.Comp;
+				break;
+			default:
+				throw new RuntimeException("ERR: you entered iligal Operatin. got: "+oper);	
+		}
+		fl = f1.copy();
+		fr = f2.copy();
+	}
 
-	public ComplexFunction(function f1, function f2, Operation oper) {
+	private  ComplexFunction(function f1, function f2, Operation oper) {
 		fl = f1;
 		fr = f2;
 		op = oper;
@@ -52,6 +85,12 @@ public class ComplexFunction implements complex_function {
 	}
 
 	public ComplexFunction(String s) {
+		try {
+			fl = new Polynom(s);
+			fr = new Polynom("0");
+			op = op.None;
+			return;
+		} catch (Exception e) {}
 		try {
 			String str = ""+s.charAt(0)+s.charAt(1);
 			switch (str)
@@ -134,13 +173,13 @@ public class ComplexFunction implements complex_function {
 	public void plus(function f1) {
 		// TODO Auto-generated method stub
 		if(fl.toString().equals("0") && op.toString().equals("None")) {
-			if(f1 instanceof Polynom_able)
+			if(f1 instanceof Polynom_able || f1 instanceof Monom)
 				fl = new Polynom(f1.toString());
 			else
 				fl = new ComplexFunction(f1.toString());	
 		}
 		else if(fr.toString().equals("0") && op.toString().equals("None") ) {
-			if(f1 instanceof Polynom_able)
+			if(f1 instanceof Polynom_able || f1 instanceof Monom)
 				fr = new Polynom(f1.toString());
 			else
 				fr = new ComplexFunction(f1.toString());
@@ -149,7 +188,7 @@ public class ComplexFunction implements complex_function {
 		else {
 			ComplexFunction cof = new ComplexFunction(this.left(), this.right(), this.getOp());
 			fl = cof;
-			if(f1 instanceof Polynom_able)
+			if(f1 instanceof Polynom_able || f1 instanceof Monom)
 				fr = new Polynom(f1.toString());
 			else
 				fr = new ComplexFunction(f1.toString());
@@ -161,13 +200,13 @@ public class ComplexFunction implements complex_function {
 	public void mul(function f1) {
 		// TODO Auto-generated method stub
 		if(fl.toString().equals("0") && op.toString().equals("None")) {
-			if(f1 instanceof Polynom_able)
+			if(f1 instanceof Polynom_able || f1 instanceof Monom)
 				fl = new Polynom(f1.toString());
 			else
 				fl = new ComplexFunction(f1.toString());	
 		}
 		else if(fr.toString().equals("0") && op.toString().equals("None") ) {
-			if(f1 instanceof Polynom_able)
+			if(f1 instanceof Polynom_able || f1 instanceof Monom)
 				fr = new Polynom(f1.toString());
 			else
 				fr = new ComplexFunction(f1.toString());
@@ -176,7 +215,7 @@ public class ComplexFunction implements complex_function {
 		else {
 			ComplexFunction cof = new ComplexFunction(this.left(), this.right(), this.getOp());
 			fl = cof;
-			if(f1 instanceof Polynom_able)
+			if(f1 instanceof Polynom_able || f1 instanceof Monom)
 				fr = new Polynom(f1.toString());
 			else
 				fr = new ComplexFunction(f1.toString());
@@ -188,13 +227,13 @@ public class ComplexFunction implements complex_function {
 	public void div(function f1) {
 		// TODO Auto-generated method stub
 		if(fl.toString().equals("0") && op.toString().equals("None")) {
-			if(f1 instanceof Polynom_able)
+			if(f1 instanceof Polynom_able || f1 instanceof Monom)
 				fl = new Polynom(f1.toString());
 			else
 				fl = new ComplexFunction(f1.toString());	
 		}
 		else if(fr.toString().equals("0") && op.toString().equals("None") ) {
-			if(f1 instanceof Polynom_able)
+			if(f1 instanceof Polynom_able || f1 instanceof Monom)
 				fr = new Polynom(f1.toString());
 			else
 				fr = new ComplexFunction(f1.toString());
@@ -203,7 +242,7 @@ public class ComplexFunction implements complex_function {
 		else {
 			ComplexFunction cof = new ComplexFunction(this.left(), this.right(), this.getOp());
 			fl = cof;
-			if(f1 instanceof Polynom_able)
+			if(f1 instanceof Polynom_able || f1 instanceof Monom)
 				fr = new Polynom(f1.toString());
 			else
 				fr = new ComplexFunction(f1.toString());
@@ -215,13 +254,13 @@ public class ComplexFunction implements complex_function {
 	public void max(function f1) {
 		// TODO Auto-generated method stub
 		if(fl.toString().equals("0") && op.toString().equals("None")) {
-			if(f1 instanceof Polynom_able)
+			if(f1 instanceof Polynom_able || f1 instanceof Monom)
 				fl = new Polynom(f1.toString());
 			else
 				fl = new ComplexFunction(f1.toString());	
 		}
 		else if(fr.toString().equals("0") && op.toString().equals("None") ) {
-			if(f1 instanceof Polynom_able)
+			if(f1 instanceof Polynom_able || f1 instanceof Monom)
 				fr = new Polynom(f1.toString());
 			else
 				fr = new ComplexFunction(f1.toString());
@@ -230,7 +269,7 @@ public class ComplexFunction implements complex_function {
 		else {
 			ComplexFunction cof = new ComplexFunction(this.left(), this.right(), this.getOp());
 			fl = cof;
-			if(f1 instanceof Polynom_able)
+			if(f1 instanceof Polynom_able || f1 instanceof Monom)
 				fr = new Polynom(f1.toString());
 			else
 				fr = new ComplexFunction(f1.toString());
@@ -242,13 +281,13 @@ public class ComplexFunction implements complex_function {
 	public void min(function f1) {
 		// TODO Auto-generated method stub
 		if(fl.toString().equals("0") && op.toString().equals("None")) {
-			if(f1 instanceof Polynom_able)
+			if(f1 instanceof Polynom_able || f1 instanceof Monom)
 				fl = new Polynom(f1.toString());
 			else
 				fl = new ComplexFunction(f1.toString());	
 		}
 		else if(fr.toString().equals("0") && op.toString().equals("None") ) {
-			if(f1 instanceof Polynom_able)
+			if(f1 instanceof Polynom_able || f1 instanceof Monom)
 				fr = new Polynom(f1.toString());
 			else
 				fr = new ComplexFunction(f1.toString());
@@ -257,7 +296,7 @@ public class ComplexFunction implements complex_function {
 		else {
 			ComplexFunction cof = new ComplexFunction(this.left(), this.right(), this.getOp());
 			fl = cof;
-			if(f1 instanceof Polynom_able)
+			if(f1 instanceof Polynom_able || f1 instanceof Monom)
 				fr = new Polynom(f1.toString());
 			else
 				fr = new ComplexFunction(f1.toString());
@@ -269,13 +308,13 @@ public class ComplexFunction implements complex_function {
 	public void comp(function f1) {
 		// TODO Auto-generated method stub
 		if(fl.toString().equals("0") && op.toString().equals("None")) {
-			if(f1 instanceof Polynom_able)
+			if(f1 instanceof Polynom_able || f1 instanceof Monom)
 				fl = new Polynom(f1.toString());
 			else
 				fl = new ComplexFunction(f1.toString());	
 		}
 		else if(fr.toString().equals("0") && op.toString().equals("None") ) {
-			if(f1 instanceof Polynom_able)
+			if(f1 instanceof Polynom_able || f1 instanceof Monom)
 				fr = new Polynom(f1.toString());
 			else
 				fr = new ComplexFunction(f1.toString());
@@ -284,7 +323,7 @@ public class ComplexFunction implements complex_function {
 		else {
 			ComplexFunction cof = new ComplexFunction(this.left(), this.right(), this.getOp());
 			fl = cof;
-			if(f1 instanceof Polynom_able)
+			if(f1 instanceof Polynom_able || f1 instanceof Monom)
 				fr = new Polynom(f1.toString());
 			else
 				fr = new ComplexFunction(f1.toString());

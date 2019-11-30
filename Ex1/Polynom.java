@@ -23,6 +23,7 @@ public class Polynom implements Polynom_able{
 	public Polynom() {
 		bank = new ArrayList<Monom>();	;
 	}
+	
 	/**
 	 * init a Polynom from a String such as:
 	 *  {"x", "3+1.4X^3-34x", "(2x^2-4)*(-1.2x-7.1)", "(3-3.4x+1)*((3.1x-1.2)-(3X^2-3.1))"};
