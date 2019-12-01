@@ -200,6 +200,10 @@ public class Polynom implements Polynom_able{
 			}
 			return true;
 		}
+		if(obj instanceof Monom) {
+			Monom m1 = (Monom)obj;
+			return this.toString().equals(m1.toString());
+		}	
 		return false;	
 	}
 

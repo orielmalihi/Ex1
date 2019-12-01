@@ -1,5 +1,9 @@
 package Ex1Testing;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.IOException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -40,45 +44,53 @@ class Functions_GUITest {
 		_data = FunctionsFactory();
 	}
 	
-	@Test
-	void testadd() {
-		Functions_GUI c = new Functions_GUI();
-		Polynom p = new Polynom("2x");
-		c.add(p);
-		System.out.println(c.contains(p));
-		System.out.println(c.size());
-		c.add(p);
-		System.out.println(c.size());
-		System.out.println(c.contains(new Polynom("-2x")));
-		System.out.println(c.add(new Polynom("-2x")));
-		System.out.println(c.size());
-	}
+
+	
 
 	//@Test
 	void testFunctions_GUI() {
-	//	fail("Not yet implemented");
-	}
-
-	//@Test
-	void testInitFromFile() {
-	//	fail("Not yet implemented");
-	}
-
-	//@Test
-	void testSaveToFile() {
-	//	fail("Not yet implemented");
-	}
-
-	//@Test
-	void testDrawFunctions() {
-		//_data.drawFunctions();
-	//	fail("Not yet implemented");
+		Functions_GUI c1 = new Functions_GUI();
+		c1.add(new Polynom("3+x^2"));
+		c1.add(new Monom("2"));
+		c1.add(new ComplexFunction("Plus(x^2,x)"));
 	}
 
 	@Test
+	void testInitFromFile() throws IOException {
+		Functions_GUI c1 = new Functions_GUI();
+		c1.add(new Polynom("3+x^2"));
+		c1.add(new Monom("2"));
+		c1.add(new ComplexFunction("Plus(x^2,x)"));
+		c1.saveToFile("Collection_Of_Functions.txt");
+		Functions_GUI c2 = new Functions_GUI();
+		c2.initFromFile("Collection_Of_Functions.txt");
+		assertEquals(c2.toString(), c1.toString());
+	}
+
+	@Test
+	void testSaveToFile() throws IOException {
+		Functions_GUI c1 = new Functions_GUI();
+		c1.add(new Polynom("-4 + 5x^3 + 10x^10"));
+		c1.add(new Monom("2x^2"));
+		c1.add(new ComplexFunction("Times(Comp(x^2,x),4)"));
+		c1.saveToFile("Collection_Of_Functions_Test2.txt");
+		Functions_GUI c2 = new Functions_GUI();
+		c2.initFromFile("Collection_Of_Functions_Test2.txt");
+		assertEquals(c2.toString(), c1.toString());
+	}
+
+//	@Test
+//	void testDrawFunctions() {
+//		_data.drawFunctions("GUI_params");
+//		
+//	}
+
+	@Test
 	void testDrawFunctionsIntIntRangeRangeInt() {
-		_data.drawFunctions();
-		//fail("Not yet implemented");
+		int w=1000, h=600, res=200;
+		Range rx = new Range(-10,10);
+		Range ry = new Range(-5,15);
+		_data.drawFunctions(w,h,rx,ry,res);
 	}
 	public static Functions_GUI FunctionsFactory() {
 		Functions_GUI ans = new Functions_GUI();

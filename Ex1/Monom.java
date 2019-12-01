@@ -171,12 +171,19 @@ public class Monom implements function{
 	 * @return
 	 */
 	public boolean equals(Object m) {
-		Monom m1 = (Monom)m;
-		double subcoef = this.get_coefficient()-m1.get_coefficient();
-		if(subcoef<0)
-			subcoef *= -1;
-		if(subcoef < EPSILON && (this._power == m1._power))
-			return true;
+		if(m instanceof Monom) {
+			Monom m1 = (Monom)m;
+			double subcoef = this.get_coefficient()-m1.get_coefficient();
+			if(subcoef<0)
+				subcoef *= -1;
+			if(subcoef < EPSILON && (this._power == m1._power))
+				return true;
+			return false;
+		}
+		if(m instanceof Polynom_able) {
+			Polynom_able m1 = (Polynom_able)m;
+			return this.toString().equals(m1.toString());
+		}
 		return false;
 	}
 
