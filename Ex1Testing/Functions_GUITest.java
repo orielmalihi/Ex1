@@ -79,11 +79,11 @@ class Functions_GUITest {
 		assertEquals(c2.toString(), c1.toString());
 	}
 
-//	@Test
-//	void testDrawFunctions() {
-//		_data.drawFunctions("GUI_params");
-//		
-//	}
+	@Test
+	void testDrawFunctions() {
+		_data.drawFunctions("GUI_params.txt");
+		
+	}
 
 	@Test
 	void testDrawFunctionsIntIntRangeRangeInt() {

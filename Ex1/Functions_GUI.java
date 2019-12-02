@@ -15,7 +15,10 @@ import java.util.Iterator;
 
 import java.io.FileNotFoundException;
 import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+
 
 
 
@@ -211,42 +214,57 @@ public class Functions_GUI implements functions {
 
 	}
 
+
 	@Override
-//	public void drawFunctions(String json_file) {
-//		// TODO Auto-generated method stub
-//		org.json.simple.parser.JSONParser jsonParser = new org.json.simple.parser.JSONParser();
-//
-//		try {
-//
-//			FileReader fileReader = new FileReader(json_file);
-//			JSONObject jsonObject = (JSONObject) jsonParser.parse(fileReader);
-//			int width = (int) jsonObject.get("Width");
-//			int height = (int) jsonObject.get("Height");
-//			int resolution = (int) jsonObject.get("Resolution");
-//			JSONArray rx = (JSONArray) jsonObject.get("Range_X");
-//			JSONArray ry = (JSONArray) jsonObject.get("Range_Y");
-//			Range rxnew;
-//			Range rynew;
-//			if((double)rx.get(0)<(double)rx.get(1))
-//				rxnew = new Range((double)rx.get(0), (double)rx.get(1));
-//			else
-//				rxnew = new Range((double)rx.get(1), (double)rx.get(0));
-//			if((double)ry.get(0)<(double)ry.get(1))
-//				rynew = new Range((double)ry.get(0), (double)ry.get(1));
-//			else
-//				rynew = new Range((double)ry.get(1), (double)ry.get(0));
-//			this.drawFunctions(width, height, rxnew, rynew, resolution);
-//
-//
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
-//
-//	}
+	public void drawFunctions(String json_file) {
+		// TODO Auto-generated method stub
+		JSONParser jsonParser = new JSONParser();
+
+		try {
+
+			FileReader fileReader = new FileReader(json_file);
+			JSONObject jsonObject = (JSONObject) jsonParser.parse(fileReader);
+			Long width2 = (Long) jsonObject.get("Width");
+			int width = width2.intValue();
+			Long height2 = (Long) jsonObject.get("Height");
+			int height = height2.intValue();
+			Long resolution2 = (Long) jsonObject.get("Resolution");
+			int resolution = resolution2.intValue();
+			JSONArray rx = (JSONArray) jsonObject.get("Range_X");
+			JSONArray ry = (JSONArray) jsonObject.get("Range_Y");
+			Range rxnew;
+			Range rynew;
+			double rx0;
+			double rx1;
+			double ry0;
+			double ry1;
+			Long rx00 = (Long) rx.get(0);
+			Long rx11 = (Long) rx.get(1);
+			Long ry00 = (Long) ry.get(0);
+			Long ry11 = (Long) ry.get(1);
+			rx0 = rx00.doubleValue();
+			rx1 = rx11.doubleValue();
+			ry0 = ry00.doubleValue();
+			ry1 = ry11.doubleValue();
+			if(rx0<rx1)
+				rxnew = new Range(rx0,rx1);
+			else
+				rxnew = new Range(rx1,rx0);
+			if(ry0<ry1)
+				rynew = new Range(ry0,ry1);
+			else
+				rynew = new Range(ry1,ry0);
+			this.drawFunctions(width, height, rxnew, rynew, resolution);
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	public String toString() {
 		String ans = "";
