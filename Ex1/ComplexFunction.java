@@ -99,15 +99,31 @@ public class ComplexFunction implements complex_function {
 				op = Operation.Plus;
 				s=s.substring(4);
 				break;
+			case "pl":
+				op = Operation.Plus;
+				s=s.substring(4);
+				break;
 			case "Ti":
 				op = Operation.Times;
 				s=s.substring(5);
+				break;
+			case "mu":
+				op = Operation.Times;
+				s=s.substring(3);
 				break;
 			case "Di":
 				op = Operation.Divid;
 				s=s.substring(5);
 				break;
+			case "di":
+				op = Operation.Divid;
+				s=s.substring(3);
+				break;
 			case "Ma":
+				op = Operation.Max;
+				s=s.substring(3);
+				break;
+			case "ma":
 				op = Operation.Max;
 				s=s.substring(3);
 				break;
@@ -115,7 +131,15 @@ public class ComplexFunction implements complex_function {
 				op = Operation.Min;
 				s=s.substring(3);
 				break;
+			case "mi":
+				op = Operation.Min;
+				s=s.substring(3);
+				break;
 			case "Co":
+				op = Operation.Comp;
+				s=s.substring(4);
+				break;
+			case "co":
 				op = Operation.Comp;
 				s=s.substring(4);
 				break;
@@ -123,9 +147,9 @@ public class ComplexFunction implements complex_function {
 				op = Operation.None;
 				s=s.substring(4);
 				break;
-			case "Er":
-				op = Operation.Error;
-				s=s.substring(5);
+			case "no":
+				op = Operation.None;
+				s=s.substring(4);
 				break;
 			default:
 				throw new RuntimeException("ERR: iligal Operation in input String. unable to build this Complex Function");
@@ -390,7 +414,7 @@ public class ComplexFunction implements complex_function {
 	public boolean equals(Object obj) {
 		if(obj instanceof ComplexFunction) {
 			ComplexFunction f = (ComplexFunction)obj;
-			return fl.equals(f.fl) && fr.equals(f.fr) && op.toString().equalsIgnoreCase(f.op.toString());
+			return fl.equals(f.fl) && fr.equals(f.fr) && op.toString().equals(f.op.toString());
 		}
 		return false;
 	}

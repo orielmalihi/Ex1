@@ -15,14 +15,14 @@ class ComplexFunctionTest {
 
 	@Test
 	void testComplexFunction() {
-		String[] goodExamples = {"Divid(4x^2,3+x)", "Plus(Divid(4x^2,3+x),-2)", "Plus(3x,Divid(x^2,x))" };
+		String[] goodExamples = {"Divid(4x^2,3+x)", "mul(x^2,4)", "Plus(Divid(4x^2,3+x),-2)", "Plus(3x,Divid(x^2,x))" };
 		for(int i = 0; i<goodExamples.length; i++) {
 			ComplexFunction f1 = new ComplexFunction(goodExamples[i]);
 			ComplexFunction f2 = new ComplexFunction(f1.toString());
 			assertEquals(f1, f2);
 			
 		}
-		String[] badExamples = { "plus(x,2)", "Comp((x^2, x)", "Comp(x^2, x))", "Min(x^2 x))"};	
+		String[] badExamples = { "pllus(x,2)", "Comp((x^2, x)", "Comp(x^2, x))", "Min(x^2 x))"};	
 		int error = 0;
 		for(int i = 0; i<badExamples.length; i++ ) {
 			try {
