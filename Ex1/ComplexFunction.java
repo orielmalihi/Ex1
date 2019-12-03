@@ -11,44 +11,65 @@ public class ComplexFunction implements complex_function {
 		fr = new Polynom("0");
 		op = Operation.None;
 	}
-	
+
 	public ComplexFunction(function f) {
 		fl = f.copy();
 		fr = new Polynom("0");
 		op = op.None;
 	}
-	
+
 	public ComplexFunction(String oper, function f1, function f2) {
 		switch (oper){
-			case "plus":
-				op = op.Plus;
-				break;
-			case "mul":
-				op = op.Times;
-				break;
-			case "div":
-				op = op.Divid;
-				break;
-			case "min":
-				op = op.Min;
-				break;
-			case "max":
-				op = op.Max;
-				break;
-			case "comp":
-				op = op.Comp;
-				break;
-			default:
-				throw new RuntimeException("ERR: you entered iligal Operatin. got: "+oper);	
+		case "plus":
+			op = op.Plus;
+			break;
+		case "mul":
+			op = op.Times;
+			break;
+		case "div":
+			op = op.Divid;
+			break;
+		case "min":
+			op = op.Min;
+			break;
+		case "max":
+			op = op.Max;
+			break;
+		case "comp":
+			op = op.Comp;
+			break;
+		default:
+			throw new RuntimeException("ERR: you entered iligal Operatin. got: "+oper);	
 		}
 		fl = f1.copy();
 		fr = f2.copy();
 	}
 
 	private  ComplexFunction(function f1, function f2, Operation oper) {
-		fl = f1;
-		fr = f2;
-		op = oper;
+		switch (oper.toString()){
+		case "Plus":
+			op = op.Plus;
+			break;
+		case "Times":
+			op = op.Times;
+			break;
+		case "Divid":
+			op = op.Divid;
+			break;
+		case "Min":
+			op = op.Min;
+			break;
+		case "Max":
+			op = op.Max;
+			break;
+		case "Comp":
+			op = op.Comp;
+			break;
+		default:
+			throw new RuntimeException("ERR: you entered iligal Operatin. got: "+oper);	
+		}
+		fl = f1.copy();
+		fr = f2.copy();
 	}
 
 	@Override
