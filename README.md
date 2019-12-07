@@ -32,7 +32,7 @@ plus, multiply, divide, max, min, complex(f1(f2(x))).
 
 
 ----------
-##Usable methods
+## Usable methods
  - **F**: to calculate f(x) for a given x.
  - **Derivative**: to return a derivative of Polynom (and Monom which is a private case of Polynom).
  - **Area**: Compute a Riman's integral from x0 to x1 in epsilon steps for a Polynom.
