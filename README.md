@@ -1,4 +1,4 @@
-﻿## About this project 
+﻿# About this project 
 >this project represent a way to **calculate** and **draw** functions like Monom, Polynom, and Complex Functions.
 
 
