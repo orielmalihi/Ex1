@@ -26,6 +26,42 @@ public class ComplexFunction implements complex_function {
 		fr = new Polynom("0");
 		op = op.None;
 	}
+	
+	/**
+	 * inits Complex function with operation,
+	 * f1 the function on the left,
+	 * and f2 the function on the right
+	 * @param oper
+	 * @param f1
+	 * @param f2
+	 */
+
+	public ComplexFunction(Operation oper, function f1, function f2) {
+		switch (oper.toString()){
+		case "Plus":
+			op = op.Plus;
+			break;
+		case "Times":
+			op = op.Times;
+			break;
+		case "Divid":
+			op = op.Divid;
+			break;
+		case "Min":
+			op = op.Min;
+			break;
+		case "Max":
+			op = op.Max;
+			break;
+		case "Comp":
+			op = op.Comp;
+			break;
+		default:
+			throw new RuntimeException("ERR: you entered iligal Operatin. got: "+oper);	
+		}
+		fl = f1.copy();
+		fr = f2.copy();
+	}
 	/**
 	 * inits Complex function with oper as the operation,
 	 * f1 the function on the left,

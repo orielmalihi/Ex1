@@ -25,7 +25,7 @@ import org.json.simple.parser.ParseException;
 
 
 public class Functions_GUI implements functions {
-	ArrayList<function> bank = new ArrayList<function>();
+	private ArrayList<function> bank = new ArrayList<function>();
 
 	@Override
 	public int size() {
