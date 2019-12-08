@@ -82,6 +82,16 @@ class ComplexFunctionTest {
 		function f2 = f1.copy();
 		assertEquals(f1, f2);
 	}
+	
+	@Test
+	void testEquals() {
+		ComplexFunction c1 = new ComplexFunction("plus(x,2)");
+		ComplexFunction c2 = new ComplexFunction("plus(2,x)");
+		ComplexFunction c3 = new ComplexFunction("mul(x,x)");
+		ComplexFunction c4 = new ComplexFunction("plus(x^2,0)");
+		assertEquals(c1, c2);
+		assertEquals(c3, c4);
+	}
 
 	@Test
 	void testPlus() {

@@ -122,7 +122,11 @@ public class Functions_GUI implements functions {
 		// TODO Auto-generated method stub
 		bank.clear();
 	}
-
+	/**
+	 * Loads a collection of funtions from a file to a new Function_GUI.
+	 * the path to the file is given by the user.
+	 * @param file
+	 */
 	@Override
 	public void initFromFile(String file) throws IOException {
 		// TODO Auto-generated method stub
@@ -140,7 +144,11 @@ public class Functions_GUI implements functions {
 		}
 
 	}
-
+	/**
+	 * Saves the Functions from this data structure to a text file
+	 * with a given String name (file)
+	 * @param file
+	 */
 	@Override
 	public void saveToFile(String file) throws IOException {
 		// TODO Auto-generated method stub
@@ -156,7 +164,11 @@ public class Functions_GUI implements functions {
 		}
 
 	}
-
+	/**
+	 * draws the functions in this data structure and saves the drawing.
+	 * the parametrs of the drawing are width, heghit, range of x, reange of y, and resolution
+	 * are given by the user.
+	 */
 	@Override
 	public void drawFunctions(int width, int height, Range rx, Range ry, int resolution) {
 		// TODO Auto-generated method stub
@@ -214,7 +226,13 @@ public class Functions_GUI implements functions {
 
 	}
 
-
+	/**
+	 * draws the functions in this data structure and saves the drawing.
+	 * the parametrs of the drawing are width, heghit, range of x, reange of y, and resolution
+	 * are located in the given json file.
+	 * the user must enter a path to the json file (string).
+	 * @param json_file
+	 */
 	@Override
 	public void drawFunctions(String json_file) {
 		// TODO Auto-generated method stub
@@ -265,7 +283,9 @@ public class Functions_GUI implements functions {
 		}
 
 	}
-
+	/**
+	 * returns this data structure as a string.
+	 */
 	public String toString() {
 		String ans = "";
 		for(int i = 0; i<bank.size(); i++)

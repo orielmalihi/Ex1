@@ -1,5 +1,9 @@
-package Ex1;
 
+/** This interface represents a complex function of type y=g(f1(x), f2(x)), where both f1, f2 are functions (or complex functions), 
+ * y and x are real numbers and g is an operation: plus, mul, div, max, min, comp (f1(f2(x))).
+**/
+
+package Ex1;
 public class ComplexFunction implements complex_function {
 	private function fl;
 	private function fr;
@@ -11,12 +15,25 @@ public class ComplexFunction implements complex_function {
 		fr = new Polynom("0");
 		op = Operation.None;
 	}
+	/**
+	 * inits ComplexFunction with the f function on the left,
+	 *  while the function on the right set to be "0"
+	 * @param f
+	 */
 
 	public ComplexFunction(function f) {
 		fl = f.copy();
 		fr = new Polynom("0");
 		op = op.None;
 	}
+	/**
+	 * inits Complex function with oper as the operation,
+	 * f1 the function on the left,
+	 * and f2 the function on the right
+	 * @param oper
+	 * @param f1
+	 * @param f2
+	 */
 
 	public ComplexFunction(String oper, function f1, function f2) {
 		switch (oper){
@@ -71,7 +88,16 @@ public class ComplexFunction implements complex_function {
 		fl = f1.copy();
 		fr = f2.copy();
 	}
-
+	/**
+	 * calculates f(x) for a given decimal x.
+	 * if the operation is Max/Min it will
+	 * return the Max/Min value between the functions on the left and
+	 *  on the right.
+	 *  if the operation is 'none' it will calculates only the function on lef.
+	 *  if the method is 'comp' it will calculate f1(f2(x)).
+	 *  this method works recursivly. 
+	 */
+	
 	@Override
 	public double f(double x) {
 		// TODO Auto-generated method stub
@@ -104,7 +130,9 @@ public class ComplexFunction implements complex_function {
 		}
 		return 0;
 	}
-
+	/**
+	 * inits complexFunction from String
+	 */
 	public ComplexFunction(String s) {
 		try {
 			fl = new Polynom(s);
@@ -199,6 +227,9 @@ public class ComplexFunction implements complex_function {
 			throw new RuntimeException("ERR: Unable to build this Complex Function. got: "+s);
 		}
 	}
+	/**
+	 * inits a function from a String
+	 */
 
 	@Override
 	public function initFromString(String s) {
@@ -206,6 +237,9 @@ public class ComplexFunction implements complex_function {
 		function f  = new ComplexFunction(s);
 		return f;
 	}
+	/**
+	 * returns a copy of the ComplexFunction
+	 */
 
 	@Override
 	public function copy() {
@@ -213,7 +247,9 @@ public class ComplexFunction implements complex_function {
 		function f = new ComplexFunction(this.toString());
 		return f;
 	}
-
+	/**
+	 * adds the f1 function to the ComplexFunction
+	 */
 	@Override
 	public void plus(function f1) {
 		// TODO Auto-generated method stub
@@ -240,7 +276,9 @@ public class ComplexFunction implements complex_function {
 			op = Operation.Plus;
 		}
 	}
-
+	/**
+	 * multiplys the ComplexFunction with the f1 function  
+	 */
 	@Override
 	public void mul(function f1) {
 		// TODO Auto-generated method stub
@@ -267,7 +305,9 @@ public class ComplexFunction implements complex_function {
 			op = Operation.Times;
 		}
 	}
-
+	/**
+	 * divides the ComplexFunction with the f1 function
+	 */
 	@Override
 	public void div(function f1) {
 		// TODO Auto-generated method stub
@@ -294,6 +334,10 @@ public class ComplexFunction implements complex_function {
 			op = Operation.Divid;
 		}
 	}
+	/**
+	 * adds the f1 function to this ComplexFunction 
+	 * and sets the operation to 'Max'.
+	 */
 
 	@Override
 	public void max(function f1) {
@@ -321,7 +365,10 @@ public class ComplexFunction implements complex_function {
 			op = Operation.Max;
 		}
 	}
-
+	/**
+	 * adds the f1 function to this ComplexFunction 
+	 * and sets the operation to 'Min'.
+	 */
 	@Override
 	public void min(function f1) {
 		// TODO Auto-generated method stub
@@ -348,6 +395,10 @@ public class ComplexFunction implements complex_function {
 			op = Operation.Min;
 		}
 	}
+	/**
+	 * adds the f1 function to this ComplexFunction 
+	 * and sets the operation to 'Comp'.
+	 */
 
 	@Override
 	public void comp(function f1) {
@@ -375,6 +426,9 @@ public class ComplexFunction implements complex_function {
 			op = Operation.Comp;
 		}
 	}
+	/**
+	 * returns the function on the left
+	 */
 
 	@Override
 	public function left() {
@@ -384,7 +438,9 @@ public class ComplexFunction implements complex_function {
 		else
 			return new ComplexFunction(fl.toString());
 	}
-
+	/**
+	 * returns the function on the right
+	 */
 	@Override
 	public function right() {
 		// TODO Auto-generated method stub
@@ -393,7 +449,9 @@ public class ComplexFunction implements complex_function {
 		else
 			return new ComplexFunction(fr.toString());
 	}
-
+	/**
+	 * returns the operation of this complex function
+	 */
 	@Override
 	public Operation getOp() {
 		// TODO Auto-generated method stub
@@ -427,17 +485,35 @@ public class ComplexFunction implements complex_function {
 				sum++;
 		return sum;
 	}
+	/**
+	 * returns this Complex Function as a string.
+	 */
 
 	public String toString() {
 		return op.toString()+"("+fl.toString()+","+fr.toString()+")";
 	}
-
+	/**
+	 * checks if this complex function is logically equal to the given object.
+	 * Note: this function is not 100% accurate. because if you want to check if
+	 * two complex function (f1,f2) are equal you must test if f1(x)=f2(x) for every 
+	 * given x. nd that is of curse not possible. in my implementation i did 2 tests
+	 * to check if f1 and f2 are equal. in one of the tests i am checking 2000 values of x if 
+	 * f1(x) = f2(x), and if it retruns false even for one value, the method returns False.
+	 */
 	public boolean equals(Object obj) {
+		boolean b = false;
+		boolean c = false;
 		if(obj instanceof ComplexFunction) {
 			ComplexFunction f = (ComplexFunction)obj;
-			return fl.equals(f.fl) && fr.equals(f.fr) && op.toString().equals(f.op.toString());
+			b = fl.equals(f.fl) && fr.equals(f.fr) && op.toString().equals(f.op.toString());
+			c = true;
+			for(int i =-1000; i<1000; i++)
+				try {
+				if(this.f(i)!=f.f(i))
+					c = false;
+				} catch (Exception e) {}
 		}
-		return false;
+		return b || c;
 	}
 
 	private int indexBetweenFunction(String s) {
