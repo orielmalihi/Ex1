@@ -160,7 +160,7 @@ public class Functions_GUI implements functions {
 			writer.close();
 		}
 		catch (Exception e) {
-			throw new RuntimeException("ERR: coud not save the Cokkection of Functions into a file");
+			throw new RuntimeException("ERR: coud not save the Collection of Functions into a file");
 		}
 
 	}
